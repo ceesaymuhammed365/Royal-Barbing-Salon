@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal Barber Salon - New Yundum</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: #ffd700;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600"><rect fill="%23333" width="1000" height="600"/></svg>');
+            background-size: cover;
+            color: white;
+            text-align: center;
+            padding: 6rem 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+        }
+
+        .cta-button {
+            background-color: #ffd700;
+            color: #333;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: #ffed4e;
+        }
+
+        section {
+            padding: 3rem 0;
+            display: none;
+        }
+
+        section.active {
+            display: block;
+        }
+
+        h2 {
+            color: #1a1a1a;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-size: 2.2rem;
+            border-bottom: 3px solid #ffd700;
+            padding-bottom: 1rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .service-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+
+        .service-card:nth-child(2) .service-image {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .service-card:nth-child(3) .service-image {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .service-card:nth-child(4) .service-image {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .service-info {
+            padding: 1.5rem;
+        }
+
+        .service-info h3 {
+            margin-bottom: 0.5rem;
+            color: #1a1a1a;
+        }
+
+        .service-info p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #ffd700;
+        }
+
+        .booking-form {
+            max-width: 700px;
+            margin: 2rem auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .form-row.full {
+            grid-template-columns: 1fr;
+        }
+
+        .radio-group, .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 0.5rem;
+        }
+
+        .radio-item, .checkbox-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .radio-item input, .checkbox-item input {
+            width: auto;
+            margin-right: 0.5rem;
+        }
+
+        .radio-item label, .checkbox-item label {
+            margin: 0;
+            font-weight: normal;
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .payment-option {
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: white;
+            position: relative;
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .payment-option:hover {
+            border-color: #ffd700;
+            background-color: #fffacd;
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .payment-option input {
+            display: none;
+        }
+
+        .payment-option input:checked + label {
+            color: #ffd700;
+            font-weight: bold;
+            border: 2px solid #ffd700;
+            padding: 0.5rem;
+            border-radius: 5px;
+        }
+
+        .payment-app-icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .payment-option label {
+            margin: 0;
+            cursor: pointer;
+            display: block;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .payment-option a {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: inherit;
+            border-radius: 10px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background-color: #ffd700;
+            color: #333;
+            padding: 1rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 1.5rem;
+        }
+
+        .submit-btn:hover {
+            background-color: #ffed4e;
+        }
+
+        .summary {
+            max-width: 700px;
+            margin: 2rem auto;
+            background: #f9f9f9;
+            padding: 2rem;
+            border-radius: 10px;
+            border-left: 4px solid #ffd700;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .summary-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .summary-total {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        .success-message {
+            display: none;
+            background-color: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 2rem;
+            text-align: center;
+            border: 1px solid #c3e6cb;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        footer {
+            background: #1a1a1a;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            nav a {
+                padding: 0.5rem 0.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a onclick="showSection('home')">🏠 Home</a>
+            <a onclick="showSection('services')">✂️ Services</a>
+            <a onclick="showSection('booking')">📅 Book Appointment</a>
+            <a onclick="showSection('home-service')">🏡 Home Service</a>
+        </nav>
+    </header>
+
+    <!-- Home Section -->
+    <section id="home" class="active">
+        <div class="hero">
+            <h1>Royal Barber Salon</h1>
+            <p>New Yundum's Premier Barbershop</p>
+            <p style="font-size: 1rem;">Professional haircuts, fades, and grooming services</p>
+            <button class="cta-button" onclick="showSection('services')">View Services</button>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container">
+            <h2>Our Services & Prices</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-image">✂️</div>
+                    <div class="service-info">
+                        <h3>Classic Haircut</h3>
+                        <p>Traditional sharp haircut with styling</p>
+                        <div class="price">Ordinary: 1,500 GMD | VIP: 2,000 GMD</div>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-image">💈</div>
+                    <div class="service-info">
+                        <h3>Fade & Line-up</h3>
+                        <p>Modern fade with clean line-up</p>
+                        <div class="price">Ordinary: 2,000 GMD | VIP: 2,500 GMD</div>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-image">🧔</div>
+                    <div class="service-info">
+                        <h3>Beard Trim & Shape</h3>
+                        <p>Professional beard grooming and styling</p>
+                        <div class="price">Ordinary: 1,200 GMD | VIP: 1,800 GMD</div>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-image">👨</div>
+                    <div class="service-info">
+                        <h3>Full Grooming Package</h3>
+                        <p>Haircut + beard trim + face treatment</p>
+                        <div class="price">Ordinary: 3,500 GMD | VIP: 5,000 GMD</div>
+                    </div>
+                </div>
+            </div>
+            <button class="cta-button" onclick="showSection('booking')" style="display: block; margin: 0 auto;">Book Now</button>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section id="booking">
+        <div class="container">
+            <h2>Book Your Appointment</h2>
+            <div class="success-message" id="successMessage">
+                ✓ Your appointment has been booked successfully! We'll see you soon!
+            </div>
+            <form class="booking-form" id="bookingForm">
+                <div class="form-group">
+                    <label for="fullName">Full Name *</label>
+                    <input type="text" id="fullName" name="fullName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number *</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="bookingDate">Booking Date *</label>
+                        <input type="date" id="bookingDate" name="bookingDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookingTime">Booking Time *</label>
+                        <input type="time" id="bookingTime" name="bookingTime" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="service">Select Service *</label>
+                    <select id="service" name="service" required onchange="updatePrice()">
+                        <option value="">-- Choose a service --</option>
+                        <option value="classic">Classic Haircut - 1,500/2,000 GMD</option>
+                        <option value="fade">Fade & Line-up - 2,000/2,500 GMD</option>
+                        <option value="beard">Beard Trim & Shape - 1,200/1,800 GMD</option>
+                        <option value="package">Full Grooming Package - 3,500/5,000 GMD</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Treatment Type *</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="ordinary" name="treatment" value="Ordinary" required onchange="updatePrice()">
+                            <label for="ordinary">Ordinary</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="vip" name="treatment" value="VIP" required onchange="updatePrice()">
+                            <label for="vip">VIP</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Service Location *</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="salon" name="location" value="Salon" required onchange="updatePrice()">
+                            <label for="salon">At Our Salon</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="home" name="location" value="Home Service" required onchange="updatePrice()">
+                            <label for="home">Home Service (+500 GMD)</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="notes">Additional Notes</label>
+                    <textarea id="notes" name="notes" rows="3" placeholder="Any special requests or preferences..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Payment Method * (Click icon to open app)</label>
+                    <div class="payment-methods">
+                        <div class="payment-option">
+                            <input type="radio" id="wave" name="payment" value="Wave Mobile Money" required onclick="openPaymentApp('wave')">
+                            <a href="javascript:void(0)" onclick="selectAndOpenApp('wave', event)" title="Click to open Wave">
+                                <span class="payment-app-icon">🌊</span>
+                                <label for="wave">Wave Mobile Money</label>
+                            </a>
+                        </div>
+                        <div class="payment-option">
+                            <input type="radio" id="afrimoney" name="payment" value="Afrimoney" required onclick="openPaymentApp('afrimoney')">
+                            <a href="javascript:void(0)" onclick="selectAndOpenApp('afrimoney', event)" title="Click to open Afrimoney">
+                                <span class="payment-app-icon">💳</span>
+                                <label for="afrimoney">Afrimoney</label>
+                            </a>
+                        </div>
+                        <div class="payment-option">
+                            <input type="radio" id="qmoney" name="payment" value="Qmoney" required onclick="openPaymentApp('qmoney')">
+                            <a href="javascript:void(0)" onclick="selectAndOpenApp('qmoney', event)" title="Click to open Qmoney">
+                                <span class="payment-app-icon">💰</span>
+                                <label for="qmoney">Qmoney</label>
+                            </a>
+                        </div>
+                        <div class="payment-option">
+                            <input type="radio" id="aps" name="payment" value="APS Mobile Money" required onclick="openPaymentApp('aps')">
+                            <a href="javascript:void(0)" onclick="selectAndOpenApp('aps', event)" title="Click to open APS">
+                                <span class="payment-app-icon">📱</span>
+                                <label for="aps">APS Mobile Money</label>
+                            </a>
+                        </div>
+                        <div class="payment-option">
+                            <input type="radio" id="yonna" name="payment" value="Yonna Wallet" required onclick="openPaymentApp('yonna')">
+                            <a href="javascript:void(0)" onclick="selectAndOpenApp('yonna', event)" title="Click to open Yonna">
+                                <span class="payment-app-icon">💼</span>
+                                <label for="yonna">Yonna Wallet</label>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="summary" id="bookingSummary" style="display: none;">
+                    <h3 style="margin-bottom: 1rem;">Booking Summary</h3>
+                    <div class="summary-item">
+                        <span>Service:</span>
+                        <span id="summaryService"></span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Treatment:</span>
+                        <span id="summaryTreatment"></span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Location:</span>
+                        <span id="summaryLocation"></span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Date & Time:</span>
+                        <span id="summaryDateTime"></span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Payment Method:</span>
+                        <span id="summaryPayment"></span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-total">Total Price:</span>
+                        <span class="summary-total" id="summaryPrice">0 GMD</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">Complete Booking</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Home Service Section -->
+    <section id="home-service">
+        <div class="container">
+            <h2>Home Service Booking</h2>
+            <div class="success-message" id="homeServiceSuccess">
+                ✓ Your home service appointment has been booked successfully!
+            </div>
+            <form class="booking-form" id="homeServiceForm">
+                <div class="form-group">
+                    <label for="hsFullName">Full Name *</label>
+                    <input type="text" id="hsFullName" name="fullName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="hsPhone">Phone Number *</label>
+                    <input type="tel" id="hsPhone" name="phone" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="hsAddress">Home Address *</label>
+                    <textarea id="hsAddress" name="address" rows="2" required placeholder="Your full home address in New Yundum..."></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="hsDate">Preferred Date *</label>
+                        <input type="date" id="hsDate" name="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="hsTime">Preferred Time *</label>
+                        <input type="time" id="hsTime" name="time" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="hsService">Select Service *</label>
+                    <select id="hsService" name="service" required onchange="updateHomeServicePrice()">
+                        <option value="">-- Choose a service --</option>
+                        <option value="classic">Classic Haircut - 2,000/2,500 GMD</option>
+                        <option value="fade">Fade & Line-up - 2,500/3,000 GMD</option>
+                        <option value="beard">Beard Trim & Shape - 1,700/2,300 GMD</option>
+                        <option value="package">Full Grooming Package - 4,500/6,000 GMD</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Treatment Type *</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="hsOrdinary" name="treatment" value="Ordinary" required onchange="updateHomeServicePrice()">
+                            <label for="hsOrdinary">Ordinary</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="hsVip" name="treatment" value="VIP" required onchange="updateHomeServicePrice()">
+                            <label for="hsVip">VIP</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="hsNotes">Special Requests</label>
+                    <textarea id="hsNotes" name="notes" rows="3" placeholder="Any specific requirements..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Payment Method * (Click icon to open app)</label>
+                    <div class="payment-methods">
+                        <div class="payment-option">
+                            <input type="radio" id="hsWave" name="payment" value="Wave Mobile Money" required onclick="openPaymentApp('wave')">
+                            <a href="javascript:void(0)" onclick="selectAndOpenApp('hsWave', event)" title="Click to open Wave">
+                                <span class="payment-app-icon">🌊</span>
+                                <label for="hsWave">Wave Mobile Money</label>
+                            </a>
+                        </div>
+                        <div class="payment-option">
+                            <input type="radio" id="hsAfrimoney" name="payment" value="Afrimoney" required onclick="openPaymentApp('afrimoney')">
+                            <a href="javascript:void(0)" onclick="selectAndOpenApp('hsAfrimoney', event)" title="Click to open Afrimoney">
+                                <span class="payment-app-icon">💳</span>
+                                <label for="hsAfrimoney">Afrimoney</label>
+                            </a>
+                        </div>
+                        <div class="payment-option">
+                            <input type="radio" id="hsQmoney" name="payment" value="Qmoney" required onclick="openPaymentApp('qmoney')">
+                            <a href="javascript:void(0)" onclick="selectAndOpenApp('hsQmoney', event)" title="Click to open Qmoney">
+                                <span class="payment-app-icon">💰</span>
+                                <label for="hsQmoney">Qmoney</label>
+                            </a>
+                        </div>
+                        <div class="payment-option">
+                            <input type="radio" id="hsAps" name="payment" value="APS Mobile Money" required onclick="openPaymentApp('aps')">
+                            <a href="javascript:void(0)" onclick="selectAndOpenApp('hsAps', event)" title="Click to open APS">
+                                <span class="payment-app-icon">📱</span>
+                                <label for="hsAps">APS Mobile Money</label>
+                            </a>
+                        </div>
+                        <div class="payment-option">
+                            <input type="radio" id="hsYonna" name="payment" value="Yonna Wallet" required onclick="openPaymentApp('yonna')">
+                            <a href="javascript:void(0)" onclick="selectAndOpenApp('hsYonna', event)" title="Click to open Yonna">
+                                <span class="payment-app-icon">💼</span>
+                                <label for="hsYonna">Yonna Wallet</label>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="summary" id="homeServiceSummary" style="display: none;">
+                    <h3 style="margin-bottom: 1rem;">Service Summary</h3>
+                    <div class="summary-item">
+                        <span>Service:</span>
+                        <span id="hsSummaryService"></span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Treatment:</span>
+                        <span id="hsSummaryTreatment"></span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Date & Time:</span>
+                        <span id="hsSummaryDateTime"></span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Location:</span>
+                        <span id="hsSummaryLocation"></span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Payment Method:</span>
+                        <span id="hsSummaryPayment"></span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-total">Total Price:</span>
+                        <span class="summary-total" id="hsSummaryPrice">0 GMD</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">Confirm Home Service Booking</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Royal Barber Salon, New Yundum. All rights reserved.</p>
+        <p>📍 Located in New Yundum | 📞 Call for inquiries</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
