@@ -107,17 +107,19 @@ function showSection(sectionId) {
 
 // Service Prices
 const servicePrices = {
-    classic: { ordinary: 1500, vip: 2000 },
-    fade: { ordinary: 2000, vip: 2500 },
-    beard: { ordinary: 1200, vip: 1800 },
-    package: { ordinary: 3500, vip: 5000 }
+    classic: { ordinary: 200, vip: 300 },
+    fade: { ordinary: 250, vip: 350 },
+    beard: { ordinary: 150, vip: 175 },
+    package: { ordinary: 3500, vip: 5000 },
+    spray: { ordinary: 400, vip: 500 }
 };
 
 const homeServicePrices = {
-    classic: { ordinary: 2000, vip: 2500 },
-    fade: { ordinary: 2500, vip: 3000 },
-    beard: { ordinary: 1700, vip: 2300 },
-    package: { ordinary: 4500, vip: 6000 }
+    classic: { ordinary: 500, vip: 1000 },
+    fade: { ordinary: 1000, vip: 1500 },
+    beard: { ordinary: 700, vip: 900 },
+    package: { ordinary: 3000, vip: 6000 },
+    spray: { ordinary: 1000, vip: 1500 }
 };
 
 // Get service display names
@@ -126,7 +128,8 @@ function getServiceName(serviceId) {
         classic: 'Classic Haircut',
         fade: 'Fade & Line-up',
         beard: 'Beard Trim & Shape',
-        package: 'Full Grooming Package'
+        package: 'Full Grooming Package',
+        spray: 'Hair Spray Service'
     };
     return names[serviceId] || '';
 }
@@ -310,10 +313,10 @@ document.addEventListener('DOMContentLoaded', function() {
             homeServiceForm.reset();
             document.getElementById('homeServiceSummary').style.display = 'none';
 
-            // Hide success message after 5 seconds
+            // Hide success message after 10 seconds
             setTimeout(() => {
                 document.getElementById('homeServiceSuccess').classList.remove('show');
-            }, 5000);
+            }, 10000);
 
             console.log('Home service booking saved:', homeServiceData);
             alert(`Home Service Booking confirmed for ${fullName}!\n\nDate: ${homeServiceData.date}\nTime: ${hsTime}\nService: ${homeServiceData.service}\nLocation: ${address}\nPayment: ${payment}\n\nOur barber will visit your home!`);
