@@ -346,6 +346,50 @@
             border-bottom: 1px solid #ddd;
         }
 
+        .bookings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .booking-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+            border: 1px solid #eee;
+        }
+
+        .booking-card h3 {
+            margin-bottom: 0.75rem;
+            color: #1a1a1a;
+        }
+
+        .booking-card p {
+            color: #555;
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
+
+        .booking-card .qr-code {
+            display: block;
+            width: 180px;
+            height: 180px;
+            margin: 1rem auto 0;
+            border-radius: 12px;
+            background: #fff;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+        }
+
+        .section-note {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+            color: #444;
+        }
+
         .summary-item:last-child {
             border-bottom: none;
             margin-bottom: 0;
@@ -408,6 +452,7 @@
             <a onclick="showSection('services')">✂️ Services</a>
             <a onclick="showSection('booking')">📅 Book Appointment</a>
             <a onclick="showSection('home-service')">🏡 Home Service</a>
+            <a onclick="showSection('bookings')">🧾 My Bookings</a>
         </nav>
     </header>
 
@@ -669,11 +714,11 @@
                     <label>Treatment Type *</label>
                     <div class="radio-group">
                         <div class="radio-item">
-                            <input type="radio" id="hsOrdinary" name="treatment" value="Ordinary" required onchange="updateHomeServicePrice()">
+                            <input type="radio" id="hsOrdinary" name="hsTreatment" value="Ordinary" required onchange="updateHomeServicePrice()">
                             <label for="hsOrdinary">Ordinary</label>
                         </div>
                         <div class="radio-item">
-                            <input type="radio" id="hsVip" name="treatment" value="VIP" required onchange="updateHomeServicePrice()">
+                            <input type="radio" id="hsVip" name="hsTreatment" value="VIP" required onchange="updateHomeServicePrice()">
                             <label for="hsVip">VIP</label>
                         </div>
                     </div>
@@ -688,35 +733,35 @@
                     <label>Payment Method * (Click icon to open app)</label>
                     <div class="payment-methods">
                         <div class="payment-option">
-                            <input type="radio" id="hsWave" name="payment" value="Wave Mobile Money" required onclick="openPaymentApp('wave')">
+                            <input type="radio" id="hsWave" name="hsPayment" value="Wave Mobile Money" required onclick="openPaymentApp('wave')">
                             <a href="javascript:void(0)" onclick="selectAndOpenApp('hsWave', event)" title="Click to open Wave">
                                 <span class="payment-app-icon">🌊</span>
                                 <label for="hsWave">Wave Mobile Money</label>
                             </a>
                         </div>
                         <div class="payment-option">
-                            <input type="radio" id="hsAfrimoney" name="payment" value="Afrimoney" required onclick="openPaymentApp('afrimoney')">
+                            <input type="radio" id="hsAfrimoney" name="hsPayment" value="Afrimoney" required onclick="openPaymentApp('afrimoney')">
                             <a href="javascript:void(0)" onclick="selectAndOpenApp('hsAfrimoney', event)" title="Click to open Afrimoney">
                                 <span class="payment-app-icon">💳</span>
                                 <label for="hsAfrimoney">Afrimoney</label>
                             </a>
                         </div>
                         <div class="payment-option">
-                            <input type="radio" id="hsQmoney" name="payment" value="Qmoney" required onclick="openPaymentApp('qmoney')">
+                            <input type="radio" id="hsQmoney" name="hsPayment" value="Qmoney" required onclick="openPaymentApp('qmoney')">
                             <a href="javascript:void(0)" onclick="selectAndOpenApp('hsQmoney', event)" title="Click to open Qmoney">
                                 <span class="payment-app-icon">💰</span>
                                 <label for="hsQmoney">Qmoney</label>
                             </a>
                         </div>
                         <div class="payment-option">
-                            <input type="radio" id="hsAps" name="payment" value="APS Mobile Money" required onclick="openPaymentApp('aps')">
+                            <input type="radio" id="hsAps" name="hsPayment" value="APS Mobile Money" required onclick="openPaymentApp('aps')">
                             <a href="javascript:void(0)" onclick="selectAndOpenApp('hsAps', event)" title="Click to open APS">
                                 <span class="payment-app-icon">📱</span>
                                 <label for="hsAps">APS Mobile Money</label>
                             </a>
                         </div>
                         <div class="payment-option">
-                            <input type="radio" id="hsYonna" name="payment" value="Yonna Wallet" required onclick="openPaymentApp('yonna')">
+                            <input type="radio" id="hsYonna" name="hsPayment" value="Yonna Wallet" required onclick="openPaymentApp('yonna')">
                             <a href="javascript:void(0)" onclick="selectAndOpenApp('hsYonna', event)" title="Click to open Yonna">
                                 <span class="payment-app-icon">💼</span>
                                 <label for="hsYonna">Yonna Wallet</label>
@@ -762,6 +807,16 @@
 
                 <button type="submit" class="submit-btn">Confirm Home Service Booking</button>
             </form>
+        </div>
+    </section>
+
+    <!-- Bookings Review Section -->
+    <section id="bookings">
+        <div class="container">
+            <h2>My Completed Bookings</h2>
+            <p class="section-note">View your completed booking forms below. Show the QR code to your barber to confirm the booking and service details instantly.</p>
+            <div id="bookingsContainer" class="bookings-grid"></div>
+            <p id="noBookingsMessage" class="section-note" style="display:none;">No completed bookings yet. Complete a booking or home service form to see your review here.</p>
         </div>
     </section>
 

@@ -115,11 +115,11 @@ const servicePrices = {
 };
 
 const homeServicePrices = {
-    classic: { ordinary: 500, vip: 1000 },
-    fade: { ordinary: 1000, vip: 1500 },
-    beard: { ordinary: 700, vip: 900 },
-    package: { ordinary: 3000, vip: 6000 },
-    spray: { ordinary: 1000, vip: 1500 }
+    classic: { ordinary: 200, vip: 300 },
+    fade: { ordinary: 250, vip: 350 },
+    beard: { ordinary: 150, vip: 175 },
+    package: { ordinary: 3500, vip: 5000 },
+    spray: { ordinary: 400, vip: 500 }
 };
 
 // Get service display names
@@ -171,10 +171,10 @@ function updatePrice() {
 // Update home service price
 function updateHomeServicePrice() {
     const service = document.getElementById('hsService').value;
-    const treatment = document.querySelector('input[name="treatment"]:checked')?.value;
+    const treatment = document.querySelector('input[name="hsTreatment"]:checked')?.value;
     const hsDate = document.getElementById('hsDate').value;
     const hsTime = document.getElementById('hsTime').value;
-    const payment = document.querySelector('input[name="payment"]:checked')?.value;
+    const payment = document.querySelector('input[name="hsPayment"]:checked')?.value;
 
     if (!service || !treatment) {
         document.getElementById('homeServiceSummary').style.display = 'none';
@@ -230,6 +230,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Create booking confirmation
             const bookingData = {
+                id: `${Date.now()}-${Math.random().toString(36).slice(2,8)}`,
+                type: 'Salon Booking',
                 name: fullName,
                 phone: phone,
                 service: getServiceName(service),
@@ -239,7 +241,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 time: bookingTime,
                 payment: payment,
                 notes: notes,
-                bookedAt: new Date().toLocaleString()
+                bookedAt: new Date().toISOString()
             };
 
             // Save to localStorage
@@ -253,6 +255,8 @@ document.addEventListener('DOMContentLoaded', function() {
             // Reset form
             bookingForm.reset();
             document.getElementById('bookingSummary').style.display = 'none';
+
+            loadBookingsReview();
 
             // Hide success message after 5 seconds
             setTimeout(() => {
@@ -274,10 +278,10 @@ document.addEventListener('DOMContentLoaded', function() {
             const phone = document.getElementById('hsPhone').value;
             const address = document.getElementById('hsAddress').value;
             const service = document.getElementById('hsService').value;
-            const treatment = document.querySelector('input[name="treatment"]:checked').value;
+            const treatment = document.querySelector('input[name="hsTreatment"]:checked').value;
             const hsDate = document.getElementById('hsDate').value;
             const hsTime = document.getElementById('hsTime').value;
-            const payment = document.querySelector('input[name="payment"]:checked').value;
+            const payment = document.querySelector('input[name="hsPayment"]:checked').value;
             const notes = document.getElementById('hsNotes').value;
 
             // Validate all fields
@@ -288,6 +292,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Create booking confirmation
             const homeServiceData = {
+                id: `${Date.now()}-${Math.random().toString(36).slice(2,8)}`,
                 name: fullName,
                 phone: phone,
                 address: address,
@@ -298,7 +303,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 payment: payment,
                 notes: notes,
                 type: 'Home Service',
-                bookedAt: new Date().toLocaleString()
+                bookedAt: new Date().toISOString()
             };
 
             // Save to localStorage
@@ -312,6 +317,8 @@ document.addEventListener('DOMContentLoaded', function() {
             // Reset form
             homeServiceForm.reset();
             document.getElementById('homeServiceSummary').style.display = 'none';
+
+            loadBookingsReview();
 
             // Hide success message after 10 seconds
             setTimeout(() => {
@@ -336,11 +343,70 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Real-time price updates for home service
-    const homeServiceElements = ['hsService', 'treatment', 'hsDate', 'hsTime', 'payment'];
+    const homeServiceElements = ['hsService', 'hsTreatment', 'hsDate', 'hsTime', 'hsPayment'];
     homeServiceElements.forEach(id => {
         const element = document.getElementById(id);
         if (element) {
             element.addEventListener('change', updateHomeServicePrice);
         }
     });
+
+    loadBookingsReview();
 });
+
+function getBookingQRCodeUrl(payload) {
+    return `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(payload)}`;
+}
+
+function buildBookingPayload(booking) {
+    return `RoyalBarberSalon|${booking.type}|${booking.name}|${booking.service}|${booking.treatment}|${booking.date}|${booking.time}|${booking.payment}|${booking.id}`;
+}
+
+function createBookingCard(booking) {
+    const card = document.createElement('div');
+    card.className = 'booking-card';
+
+    const title = booking.type === 'Home Service' ? 'Home Service Booking' : 'Salon Booking';
+    card.innerHTML = `
+        <h3>${title}</h3>
+        <p><strong>Name:</strong> ${booking.name}</p>
+        <p><strong>Phone:</strong> ${booking.phone}</p>
+        <p><strong>Service:</strong> ${booking.service}</p>
+        <p><strong>Treatment:</strong> ${booking.treatment}</p>
+        <p><strong>Date & Time:</strong> ${booking.date} at ${booking.time}</p>
+        <p><strong>Payment:</strong> ${booking.payment}</p>
+        ${booking.type === 'Home Service' ? `<p><strong>Address:</strong> ${booking.address}</p>` : ''}
+        ${booking.notes ? `<p><strong>Notes:</strong> ${booking.notes}</p>` : ''}
+        <img class="qr-code" src="${getBookingQRCodeUrl(buildBookingPayload(booking))}" alt="Booking QR Code">
+        <p style="text-align:center; margin-top:0.5rem; color:#777; font-size:0.95rem;">Scan this QR code with the barber to confirm your booking.</p>
+    `;
+
+    return card;
+}
+
+function loadBookingsReview() {
+    const bookingsContainer = document.getElementById('bookingsContainer');
+    const noBookingsMessage = document.getElementById('noBookingsMessage');
+
+    if (!bookingsContainer || !noBookingsMessage) return;
+
+    const bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+    const homeServiceBookings = JSON.parse(localStorage.getItem('homeServiceBookings')) || [];
+    const allBookings = [...bookings, ...homeServiceBookings];
+
+    bookingsContainer.innerHTML = '';
+
+    if (allBookings.length === 0) {
+        noBookingsMessage.style.display = 'block';
+        bookingsContainer.style.display = 'none';
+        return;
+    }
+
+    noBookingsMessage.style.display = 'none';
+    bookingsContainer.style.display = 'grid';
+
+    allBookings.sort((a, b) => new Date(b.bookedAt) - new Date(a.bookedAt));
+    allBookings.forEach(booking => {
+        bookingsContainer.appendChild(createBookingCard(booking));
+    });
+}
