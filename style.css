@@ -128,7 +128,7 @@ h2 {
 
 .service-image {
     width: 100%;
-    height: 200px;
+    height: 220px;
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -140,6 +140,7 @@ h2 {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
     display: block;
 }
 
@@ -304,9 +305,11 @@ input:focus, select:focus, textarea:focus {
 }
 
 .payment-app-icon {
-    font-size: 3rem;
-    margin-bottom: 0.5rem;
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
     display: block;
+    margin-bottom: 0.5rem;
 }
 
 .payment-option label {
