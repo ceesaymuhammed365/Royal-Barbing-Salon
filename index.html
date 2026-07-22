@@ -4,455 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Royal Barber Salon - New Yundum</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-        }
-
-        header {
-            background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
-            color: white;
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            cursor: pointer;
-            transition: color 0.3s;
-            font-weight: 500;
-        }
-
-        nav a:hover {
-            color: #ffd700;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .hero {
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600"><rect fill="%23333" width="1000" height="600"/></svg>');
-            background-size: cover;
-            color: white;
-            text-align: center;
-            padding: 6rem 2rem;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
-        }
-
-        .cta-button {
-            background-color: #ffd700;
-            color: #333;
-            padding: 0.8rem 2rem;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
-
-        .cta-button:hover {
-            background-color: #ffed4e;
-        }
-
-        section {
-            padding: 3rem 0;
-            display: none;
-        }
-
-        section.active {
-            display: block;
-        }
-
-        h2 {
-            color: #1a1a1a;
-            margin-bottom: 2rem;
-            text-align: center;
-            font-size: 2.2rem;
-            border-bottom: 3px solid #ffd700;
-            padding-bottom: 1rem;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .service-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-        }
-
-        .service-image {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 4rem;
-        }
-
-        .service-card:nth-child(2) .service-image {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        }
-
-        .service-card:nth-child(3) .service-image {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-        }
-
-        .service-card:nth-child(4) .service-image {
-            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-        }
-
-        .service-info {
-            padding: 1.5rem;
-        }
-
-        .service-info h3 {
-            margin-bottom: 0.5rem;
-            color: #1a1a1a;
-        }
-
-        .service-info p {
-            color: #666;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .price {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #ffd700;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: bold;
-            color: #333;
-        }
-
-        input, select, textarea {
-            width: 100%;
-            padding: 0.8rem;
-            border: 2px solid #ddd;
-            border-radius: 5px;
-            font-size: 1rem;
-            transition: border-color 0.3s;
-        }
-
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: #ffd700;
-        }
-
-        .booking-form {
-            max-width: 700px;
-            margin: 2rem auto;
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-        }
-
-        .form-row.full {
-            grid-template-columns: 1fr;
-        }
-
-        .radio-group, .checkbox-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-            margin-top: 0.5rem;
-        }
-
-        .radio-item, .checkbox-item {
-            display: flex;
-            align-items: center;
-        }
-
-        .radio-item input, .checkbox-item input {
-            width: auto;
-            margin-right: 0.5rem;
-        }
-
-        .radio-item label, .checkbox-item label {
-            margin: 0;
-            font-weight: normal;
-        }
-
-        .payment-methods {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .payment-option {
-            padding: 1rem;
-            border: 2px solid #ddd;
-            border-radius: 10px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            background: white;
-            position: relative;
-            min-height: 100px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .payment-option:hover {
-            border-color: #ffd700;
-            background-color: #fffacd;
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .payment-option input {
-            display: none;
-        }
-
-        .payment-option input:checked + label {
-            color: #ffd700;
-            font-weight: bold;
-            border: 2px solid #ffd700;
-            padding: 0.5rem;
-            border-radius: 5px;
-        }
-
-        .payment-app-icon {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-            display: block;
-        }
-
-        .payment-option label {
-            margin: 0;
-            cursor: pointer;
-            display: block;
-            font-weight: 500;
-            transition: all 0.3s;
-        }
-
-        .payment-option a {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            color: inherit;
-            border-radius: 10px;
-        }
-
-        .submit-btn {
-            width: 100%;
-            background-color: #ffd700;
-            color: #333;
-            padding: 1rem;
-            border: none;
-            border-radius: 5px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin-top: 1.5rem;
-        }
-
-        .submit-btn:hover {
-            background-color: #ffed4e;
-        }
-
-        .summary {
-            max-width: 700px;
-            margin: 2rem auto;
-            background: #f9f9f9;
-            padding: 2rem;
-            border-radius: 10px;
-            border-left: 4px solid #ffd700;
-        }
-
-        .summary-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 1rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .bookings-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .booking-card {
-            background: white;
-            border-radius: 12px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.12);
-            border: 1px solid #eee;
-        }
-
-        .booking-card h3 {
-            margin-bottom: 0.75rem;
-            color: #1a1a1a;
-        }
-
-        .booking-card p {
-            color: #555;
-            margin-bottom: 0.5rem;
-            line-height: 1.4;
-        }
-
-        .booking-card .qr-code {
-            display: block;
-            width: 180px;
-            height: 180px;
-            margin: 1rem auto 0;
-            border-radius: 12px;
-            background: #fff;
-            padding: 0.5rem;
-            border: 1px solid #ddd;
-        }
-
-        .section-note {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto 1.5rem;
-            color: #444;
-        }
-
-        .summary-item:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-
-        .summary-total {
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: #ffd700;
-        }
-
-        .success-message {
-            display: none;
-            background-color: #d4edda;
-            color: #155724;
-            padding: 1rem;
-            border-radius: 5px;
-            margin-bottom: 2rem;
-            text-align: center;
-            border: 1px solid #c3e6cb;
-        }
-
-        .success-message.show {
-            display: block;
-        }
-
-        footer {
-            background: #1a1a1a;
-            color: white;
-            text-align: center;
-            padding: 2rem;
-            margin-top: 3rem;
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-
-            nav {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-
-            nav a {
-                padding: 0.5rem 0.25rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
+
+    
+
 <body>
     <header>
         <nav>
-            <a onclick="showSection('home')">🏠 Home</a>
-            <a onclick="showSection('services')">✂️ Services</a>
-            <a onclick="showSection('booking')">📅 Book Appointment</a>
-            <a onclick="showSection('home-service')">🏡 Home Service</a>
-            <a onclick="showSection('bookings')">🧾 My Bookings</a>
+            <a onclick="showSection('home')">Home</a>
+            <a onclick="showSection('services')">Services</a>
+            <a onclick="showSection('booking')">Book Appointment</a>
+            <a onclick="showSection('home-service')">Home Service</a>
+            <a onclick="showSection('bookings')">My Bookings</a>
         </nav>
     </header>
 
@@ -472,7 +37,7 @@
             <h2>Our Services & Prices</h2>
             <div class="services-grid">
                 <div class="service-card">
-                    <div class="service-image">✂️</div>
+                    <div class="service-image"><img src="images/OIP.webp" alt="Classic Haircut"></div>
                     <div class="service-info">
                         <h3>Classic Haircut</h3>
                         <p>Traditional sharp haircut with styling</p>
@@ -481,7 +46,7 @@
                 </div>
 
                 <div class="service-card">
-                    <div class="service-image">💈</div>
+                    <div class="service-image"><img src="images/OIP (1).webp" alt="Fade and Line-up"></div>
                     <div class="service-info">
                         <h3>Fade & Line-up</h3>
                         <p>Modern fade with clean line-up</p>
@@ -490,7 +55,7 @@
                 </div>
 
                 <div class="service-card">
-                    <div class="service-image">🧔</div>
+                    <div class="service-image"><img src="images/OIP (2).webp" alt="Beard Trim and Shape"></div>
                     <div class="service-info">
                         <h3>Beard Trim & Shape</h3>
                         <p>Professional beard grooming and styling</p>
@@ -499,7 +64,7 @@
                 </div>
 
                 <div class="service-card">
-                    <div class="service-image">👨</div>
+                    <div class="service-image"><img src="images/download.webp" alt="Full Grooming Package"></div>
                     <div class="service-info">
                         <h3>Full Grooming Package</h3>
                         <p>Haircut + beard trim + face treatment</p>
@@ -516,7 +81,7 @@
         <div class="container">
             <h2>Book Your Appointment</h2>
             <div class="success-message" id="successMessage">
-                ✓ Your appointment has been booked successfully! We'll see you soon!
+                Your appointment has been booked successfully! We'll see you soon.
             </div>
             <form class="booking-form" id="bookingForm">
                 <div class="form-group">
@@ -590,36 +155,31 @@
                         <div class="payment-option">
                             <input type="radio" id="wave" name="payment" value="Wave Mobile Money" required onclick="openPaymentApp('wave')">
                             <a href="javascript:void(0)" onclick="selectAndOpenApp('wave', event)" title="Click to open Wave">
-                                <span class="payment-app-icon">🌊</span>
-                                <label for="wave">Wave Mobile Money</label>
+                                        <label for="wave">Wave Mobile Money</label>
                             </a>
                         </div>
                         <div class="payment-option">
                             <input type="radio" id="afrimoney" name="payment" value="Afrimoney" required onclick="openPaymentApp('afrimoney')">
                             <a href="javascript:void(0)" onclick="selectAndOpenApp('afrimoney', event)" title="Click to open Afrimoney">
-                                <span class="payment-app-icon">💳</span>
-                                <label for="afrimoney">Afrimoney</label>
+                                        <label for="afrimoney">Afrimoney</label>
                             </a>
                         </div>
                         <div class="payment-option">
                             <input type="radio" id="qmoney" name="payment" value="Qmoney" required onclick="openPaymentApp('qmoney')">
                             <a href="javascript:void(0)" onclick="selectAndOpenApp('qmoney', event)" title="Click to open Qmoney">
-                                <span class="payment-app-icon">💰</span>
-                                <label for="qmoney">Qmoney</label>
+                                        <label for="qmoney">Qmoney</label>
                             </a>
                         </div>
                         <div class="payment-option">
                             <input type="radio" id="aps" name="payment" value="APS Mobile Money" required onclick="openPaymentApp('aps')">
                             <a href="javascript:void(0)" onclick="selectAndOpenApp('aps', event)" title="Click to open APS">
-                                <span class="payment-app-icon">📱</span>
-                                <label for="aps">APS Mobile Money</label>
+                                        <label for="aps">APS Mobile Money</label>
                             </a>
                         </div>
                         <div class="payment-option">
                             <input type="radio" id="yonna" name="payment" value="Yonna Wallet" required onclick="openPaymentApp('yonna')">
                             <a href="javascript:void(0)" onclick="selectAndOpenApp('yonna', event)" title="Click to open Yonna">
-                                <span class="payment-app-icon">💼</span>
-                                <label for="yonna">Yonna Wallet</label>
+                                        <label for="yonna">Yonna Wallet</label>
                             </a>
                         </div>
                     </div>
@@ -670,7 +230,7 @@
         <div class="container">
             <h2>Home Service Booking</h2>
             <div class="success-message" id="homeServiceSuccess">
-                ✓ Your home service appointment has been booked successfully!
+                Your home service appointment has been booked successfully.
             </div>
             <form class="booking-form" id="homeServiceForm">
                 <div class="form-group">
@@ -735,36 +295,31 @@
                         <div class="payment-option">
                             <input type="radio" id="hsWave" name="hsPayment" value="Wave Mobile Money" required onclick="openPaymentApp('wave')">
                             <a href="javascript:void(0)" onclick="selectAndOpenApp('hsWave', event)" title="Click to open Wave">
-                                <span class="payment-app-icon">🌊</span>
-                                <label for="hsWave">Wave Mobile Money</label>
+                                        <label for="hsWave">Wave Mobile Money</label>
                             </a>
                         </div>
                         <div class="payment-option">
                             <input type="radio" id="hsAfrimoney" name="hsPayment" value="Afrimoney" required onclick="openPaymentApp('afrimoney')">
                             <a href="javascript:void(0)" onclick="selectAndOpenApp('hsAfrimoney', event)" title="Click to open Afrimoney">
-                                <span class="payment-app-icon">💳</span>
-                                <label for="hsAfrimoney">Afrimoney</label>
+                                        <label for="hsAfrimoney">Afrimoney</label>
                             </a>
                         </div>
                         <div class="payment-option">
                             <input type="radio" id="hsQmoney" name="hsPayment" value="Qmoney" required onclick="openPaymentApp('qmoney')">
                             <a href="javascript:void(0)" onclick="selectAndOpenApp('hsQmoney', event)" title="Click to open Qmoney">
-                                <span class="payment-app-icon">💰</span>
-                                <label for="hsQmoney">Qmoney</label>
+                                        <label for="hsQmoney">Qmoney</label>
                             </a>
                         </div>
                         <div class="payment-option">
                             <input type="radio" id="hsAps" name="hsPayment" value="APS Mobile Money" required onclick="openPaymentApp('aps')">
                             <a href="javascript:void(0)" onclick="selectAndOpenApp('hsAps', event)" title="Click to open APS">
-                                <span class="payment-app-icon">📱</span>
-                                <label for="hsAps">APS Mobile Money</label>
+                                        <label for="hsAps">APS Mobile Money</label>
                             </a>
                         </div>
                         <div class="payment-option">
                             <input type="radio" id="hsYonna" name="hsPayment" value="Yonna Wallet" required onclick="openPaymentApp('yonna')">
                             <a href="javascript:void(0)" onclick="selectAndOpenApp('hsYonna', event)" title="Click to open Yonna">
-                                <span class="payment-app-icon">💼</span>
-                                <label for="hsYonna">Yonna Wallet</label>
+                                        <label for="hsYonna">Yonna Wallet</label>
                             </a>
                         </div>
                     </div>
@@ -822,7 +377,7 @@
 
     <footer>
         <p>&copy; 2026 Royal Barber Salon, New Yundum. All rights reserved.</p>
-        <p>📍 Located in New Yundum | 📞 For more inquiries call us @ +220 3206415.</p>
+        <p>Located in New Yundum | For inquiries call +220 3206415.</p>
     </footer>
 
     <script src="script.js"></script>

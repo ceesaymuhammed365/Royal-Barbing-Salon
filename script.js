@@ -241,6 +241,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 time: bookingTime,
                 payment: payment,
                 notes: notes,
+                status: 'pending',
                 bookedAt: new Date().toISOString()
             };
 
@@ -303,6 +304,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 payment: payment,
                 notes: notes,
                 type: 'Home Service',
+                status: 'pending',
                 bookedAt: new Date().toISOString()
             };
 
@@ -355,11 +357,59 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function getBookingQRCodeUrl(payload) {
-    return `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(payload)}`;
+    return `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(payload)}`;
 }
 
 function buildBookingPayload(booking) {
-    return `RoyalBarberSalon|${booking.type}|${booking.name}|${booking.service}|${booking.treatment}|${booking.date}|${booking.time}|${booking.payment}|${booking.id}`;
+    return `RoyalBarberSalon|${booking.type}|${booking.name}|${booking.service}|${booking.treatment}|${booking.date}|${booking.time}|${booking.payment}|${booking.id}|${booking.status}`;
+}
+
+function updateBookingStatus(bookingId, status) {
+    let bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+    let homeServiceBookings = JSON.parse(localStorage.getItem('homeServiceBookings')) || [];
+
+    const updateList = (list) => {
+        const index = list.findIndex(item => item.id === bookingId);
+        if (index !== -1) {
+            list[index].status = status;
+            list[index].updatedAt = new Date().toISOString();
+            return true;
+        }
+        return false;
+    };
+
+    if (updateList(bookings)) {
+        localStorage.setItem('bookings', JSON.stringify(bookings));
+        return true;
+    }
+    if (updateList(homeServiceBookings)) {
+        localStorage.setItem('homeServiceBookings', JSON.stringify(homeServiceBookings));
+        return true;
+    }
+    return false;
+}
+
+function deleteBooking(bookingId) {
+    let bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+    let homeServiceBookings = JSON.parse(localStorage.getItem('homeServiceBookings')) || [];
+
+    bookings = bookings.filter(item => item.id !== bookingId);
+    homeServiceBookings = homeServiceBookings.filter(item => item.id !== bookingId);
+    localStorage.setItem('bookings', JSON.stringify(bookings));
+    localStorage.setItem('homeServiceBookings', JSON.stringify(homeServiceBookings));
+    loadBookingsReview();
+}
+
+function cancelBooking(bookingId) {
+    if (updateBookingStatus(bookingId, 'cancelled')) {
+        loadBookingsReview();
+    }
+}
+
+function confirmBooking(bookingId) {
+    if (updateBookingStatus(bookingId, 'confirmed')) {
+        loadBookingsReview();
+    }
 }
 
 function createBookingCard(booking) {
@@ -367,8 +417,36 @@ function createBookingCard(booking) {
     card.className = 'booking-card';
 
     const title = booking.type === 'Home Service' ? 'Home Service Booking' : 'Salon Booking';
+    const statusLabel = booking.status === 'confirmed'
+        ? '<span class="booking-status confirmed">Confirmed by barber</span>'
+        : booking.status === 'cancelled'
+            ? '<span class="booking-status cancelled">Cancelled</span>'
+            : '<span class="booking-status pending">Pending</span>';
+
+    let actionButtons = '';
+    if (booking.status === 'pending') {
+        actionButtons = `
+            <div class="booking-actions">
+                <button type="button" class="action-btn cancel-btn" onclick="cancelBooking('${booking.id}')">Cancel Appointment</button>
+                <button type="button" class="action-btn confirm-btn" onclick="confirmBooking('${booking.id}')">Mark as Scanned</button>
+            </div>
+        `;
+    } else if (booking.status === 'confirmed') {
+        actionButtons = `
+            <div class="booking-actions">
+                <button type="button" class="action-btn delete-btn" onclick="deleteBooking('${booking.id}')">Delete Booking</button>
+            </div>
+        `;
+    } else if (booking.status === 'cancelled') {
+        actionButtons = `
+            <div class="booking-actions">
+                <button type="button" class="action-btn delete-btn" onclick="deleteBooking('${booking.id}')">Remove Cancelled Booking</button>
+            </div>
+        `;
+    }
+
     card.innerHTML = `
-        <h3>${title}</h3>
+        <h3>${title} ${statusLabel}</h3>
         <p><strong>Name:</strong> ${booking.name}</p>
         <p><strong>Phone:</strong> ${booking.phone}</p>
         <p><strong>Service:</strong> ${booking.service}</p>
@@ -379,6 +457,7 @@ function createBookingCard(booking) {
         ${booking.notes ? `<p><strong>Notes:</strong> ${booking.notes}</p>` : ''}
         <img class="qr-code" src="${getBookingQRCodeUrl(buildBookingPayload(booking))}" alt="Booking QR Code">
         <p style="text-align:center; margin-top:0.5rem; color:#777; font-size:0.95rem;">Scan this QR code with the barber to confirm your booking.</p>
+        ${actionButtons}
     `;
 
     return card;
