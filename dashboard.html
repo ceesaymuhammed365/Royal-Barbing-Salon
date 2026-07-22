@@ -1,0 +1,186 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Barber Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css" />
+  </head>
+  <body>
+    <div class="dashboard-layout">
+      <aside class="sidebar">
+        <div class="brand-panel">
+          <span class="brand-icon">✂</span>
+          <div>
+            <h1>BarberPro</h1>
+            <p>Salon Dashboard</p>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav" aria-label="Main navigation">
+          <button class="nav-item active" data-page="dashboard">Dashboard</button>
+          <button class="nav-item" data-page="appointments">Appointments</button>
+          <button class="nav-item" data-page="customers">Customers</button>
+          <button class="nav-item" data-page="payments">Payments</button>
+          <button class="nav-item" data-page="services">Services</button>
+          <button class="nav-item" data-page="settings">Settings</button>
+        </nav>
+
+        <div class="sidebar-footer">
+          <p>Ready for the next client</p>
+        </div>
+      </aside>
+
+      <main class="content-area">
+        <header class="topbar">
+          <div class="page-heading">
+            <h2>Dashboard</h2>
+            <p>View your latest bookings, revenue, and service activity.</p>
+          </div>
+          <div class="topbar-actions">
+            <button id="sidebarToggle" class="menu-toggle" aria-label="Toggle sidebar">☰</button>
+            <div class="profile-badge">AB</div>
+          </div>
+        </header>
+
+        <section class="overview-grid">
+          <article class="card card-primary">
+            <div>
+              <p>Earnings</p>
+              <h3>$5,420</h3>
+            </div>
+            <span class="card-note">+12% this month</span>
+          </article>
+          <article class="card card-secondary">
+            <div>
+              <p>Appointments</p>
+              <h3>24</h3>
+            </div>
+            <span class="card-note">5 confirmed today</span>
+          </article>
+          <article class="card card-tertiary">
+            <div>
+              <p>Customers</p>
+              <h3>128</h3>
+            </div>
+            <span class="card-note">New clients this week</span>
+          </article>
+          <article class="card card-quaternary">
+            <div>
+              <p>Services</p>
+              <h3>8</h3>
+            </div>
+            <span class="card-note">Active service items</span>
+          </article>
+        </section>
+
+        <section class="main-panels">
+          <article class="panel appointments-panel">
+            <div class="panel-header">
+              <div>
+                <h3>Upcoming Appointments</h3>
+                <p>Manage the next client schedule.</p>
+              </div>
+              <a href="#">See all</a>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Time</th>
+                    <th>Client</th>
+                    <th>Service</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>09:30 AM</td>
+                    <td>Marcus Reed</td>
+                    <td>Signature Cut</td>
+                    <td><span class="status confirmed">Confirmed</span></td>
+                  </tr>
+                  <tr>
+                    <td>10:45 AM</td>
+                    <td>Sophia Lane</td>
+                    <td>Beard Trim</td>
+                    <td><span class="status pending">Pending</span></td>
+                  </tr>
+                  <tr>
+                    <td>12:00 PM</td>
+                    <td>Jordan Lee</td>
+                    <td>Hot Towel Shave</td>
+                    <td><span class="status confirmed">Confirmed</span></td>
+                  </tr>
+                  <tr>
+                    <td>01:30 PM</td>
+                    <td>Olivia West</td>
+                    <td>Fade & Shape</td>
+                    <td><span class="status cancelled">Cancelled</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+
+          <article class="panel summary-panel">
+            <div class="panel-header">
+              <div>
+                <h3>Salon Summary</h3>
+                <p>Quick control and top metrics.</p>
+              </div>
+            </div>
+            <div class="summary-list">
+              <div class="summary-item">
+                <span>Walk-ins</span>
+                <strong>7</strong>
+              </div>
+              <div class="summary-item">
+                <span>Today Revenue</span>
+                <strong>$820</strong>
+              </div>
+              <div class="summary-item">
+                <span>Confirmed</span>
+                <strong>18</strong>
+              </div>
+              <div class="summary-item">
+                <span>Open Slots</span>
+                <strong>6</strong>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <section class="services-panel">
+          <div class="panel-header">
+            <div>
+              <h3>Popular Services</h3>
+              <p>Build your schedule from top offerings.</p>
+            </div>
+            <a href="#">Manage services</a>
+          </div>
+          <div class="service-grid">
+            <div class="service-card">
+              <h4>Classic Haircut</h4>
+              <p>$28</p>
+            </div>
+            <div class="service-card">
+              <h4>Beard Trim</h4>
+              <p>$18</p>
+            </div>
+            <div class="service-card">
+              <h4>Hot Towel Shave</h4>
+              <p>$24</p>
+            </div>
+            <div class="service-card">
+              <h4>Color Touch</h4>
+              <p>$35</p>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="dashboard.js"></script>
+  </body>
+</html>
