@@ -31,6 +31,34 @@ const pageContent = {
   }
 };
 
+function updateBookingRow(row, bookingStatus) {
+  const bookingLabel = row.querySelector('.booking-status');
+
+  if (bookingLabel) {
+    bookingLabel.textContent = bookingStatus;
+    bookingLabel.className = `booking-status ${bookingStatus.toLowerCase()}`;
+  }
+}
+
+function handleActionClick(event) {
+  const button = event.target.closest('.action-btn');
+  if (!button) return;
+
+  const row = button.closest('tr');
+  if (!row) return;
+
+  const statusByAction = {
+    confirm: 'Confirmed',
+    complete: 'Completed',
+    cancel: 'Cancelled'
+  };
+  const action = Object.keys(statusByAction).find((name) => button.classList.contains(name));
+
+  if (action) {
+    updateBookingRow(row, statusByAction[action]);
+  }
+}
+
 navItems.forEach((item) => {
   item.addEventListener('click', () => {
     navItems.forEach((nav) => nav.classList.remove('active'));
@@ -53,6 +81,11 @@ if (toggleButton) {
     sidebar.classList.toggle('open');
   });
 }
+
+const actionButtons = document.querySelectorAll('.action-btn');
+actionButtons.forEach((button) => {
+  button.addEventListener('click', handleActionClick);
+});
 
 window.addEventListener('resize', () => {
   if (window.innerWidth > 760) {

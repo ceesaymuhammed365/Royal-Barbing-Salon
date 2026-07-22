@@ -87,36 +87,74 @@
               <table>
                 <thead>
                   <tr>
-                    <th>Time</th>
-                    <th>Client</th>
-                    <th>Service</th>
-                    <th>Status</th>
+                    <th>Customer</th>
+                    <th>Phone</th>
+                    <th>Payment</th>
+                    <th>Booking</th>
+                    <th>QR Code</th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>09:30 AM</td>
-                    <td>Marcus Reed</td>
-                    <td>Signature Cut</td>
-                    <td><span class="status confirmed">Confirmed</span></td>
+                  <tr data-booking="1">
+                    <td>
+                      <strong>Marcus Reed</strong>
+                      <span class="table-note">Signature Cut</span>
+                    </td>
+                    <td>+1 (555) 845-2212</td>
+                    <td><span class="payment-status paid">Paid</span></td>
+                    <td><span class="booking-status confirmed">Confirmed</span></td>
+                    <td><div class="qr-badge">QR</div></td>
+                    <td class="action-buttons">
+                      <button class="action-btn confirm">Confirm</button>
+                      <button class="action-btn complete">Complete</button>
+                      <button class="action-btn cancel">Cancel</button>
+                    </td>
                   </tr>
-                  <tr>
-                    <td>10:45 AM</td>
-                    <td>Sophia Lane</td>
-                    <td>Beard Trim</td>
-                    <td><span class="status pending">Pending</span></td>
+                  <tr data-booking="2">
+                    <td>
+                      <strong>Sophia Lane</strong>
+                      <span class="table-note">Beard Trim</span>
+                    </td>
+                    <td>+1 (555) 712-3398</td>
+                    <td><span class="payment-status pending">Pending</span></td>
+                    <td><span class="booking-status pending">Pending</span></td>
+                    <td><div class="qr-badge">QR</div></td>
+                    <td class="action-buttons">
+                      <button class="action-btn confirm">Confirm</button>
+                      <button class="action-btn complete">Complete</button>
+                      <button class="action-btn cancel">Cancel</button>
+                    </td>
                   </tr>
-                  <tr>
-                    <td>12:00 PM</td>
-                    <td>Jordan Lee</td>
-                    <td>Hot Towel Shave</td>
-                    <td><span class="status confirmed">Confirmed</span></td>
+                  <tr data-booking="3">
+                    <td>
+                      <strong>Jordan Lee</strong>
+                      <span class="table-note">Hot Towel Shave</span>
+                    </td>
+                    <td>+1 (555) 640-1921</td>
+                    <td><span class="payment-status paid">Paid</span></td>
+                    <td><span class="booking-status confirmed">Confirmed</span></td>
+                    <td><div class="qr-badge">QR</div></td>
+                    <td class="action-buttons">
+                      <button class="action-btn confirm">Confirm</button>
+                      <button class="action-btn complete">Complete</button>
+                      <button class="action-btn cancel">Cancel</button>
+                    </td>
                   </tr>
-                  <tr>
-                    <td>01:30 PM</td>
-                    <td>Olivia West</td>
-                    <td>Fade & Shape</td>
-                    <td><span class="status cancelled">Cancelled</span></td>
+                  <tr data-booking="4">
+                    <td>
+                      <strong>Olivia West</strong>
+                      <span class="table-note">Fade & Shape</span>
+                    </td>
+                    <td>+1 (555) 929-4044</td>
+                    <td><span class="payment-status failed">Failed</span></td>
+                    <td><span class="booking-status cancelled">Cancelled</span></td>
+                    <td><div class="qr-badge">QR</div></td>
+                    <td class="action-buttons">
+                      <button class="action-btn confirm">Confirm</button>
+                      <button class="action-btn complete">Complete</button>
+                      <button class="action-btn cancel">Cancel</button>
+                    </td>
                   </tr>
                 </tbody>
               </table>
