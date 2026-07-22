@@ -107,20 +107,35 @@ function showSection(sectionId) {
 
 // Service Prices
 const servicePrices = {
-    classic: { ordinary: 200, vip: 300 },
-    fade: { ordinary: 250, vip: 350 },
-    beard: { ordinary: 150, vip: 175 },
+    classic: { ordinary: 1500, vip: 2000 },
+    fade: { ordinary: 2000, vip: 2500 },
+    beard: { ordinary: 1200, vip: 1800 },
     package: { ordinary: 3500, vip: 5000 },
-    spray: { ordinary: 400, vip: 500 }
+    spray: { ordinary: 400, vip: 500 },
+    curly: { ordinary: 2500, vip: 3000 },
+    kids: { ordinary: 1000, vip: 1500 }
 };
 
 const homeServicePrices = {
-    classic: { ordinary: 200, vip: 300 },
-    fade: { ordinary: 250, vip: 350 },
-    beard: { ordinary: 150, vip: 175 },
+    classic: { ordinary: 1500, vip: 2000 },
+    fade: { ordinary: 2000, vip: 2500 },
+    beard: { ordinary: 1200, vip: 1800 },
     package: { ordinary: 3500, vip: 5000 },
-    spray: { ordinary: 400, vip: 500 }
+    spray: { ordinary: 400, vip: 500 },
+    curly: { ordinary: 2500, vip: 3000 },
+    kids: { ordinary: 1000, vip: 1500 }
 };
+
+const BOOKING_DATA_VERSION = '2';
+
+function initializeBookingStorage() {
+    const currentVersion = localStorage.getItem('bookingDataVersion');
+    if (currentVersion !== BOOKING_DATA_VERSION) {
+        localStorage.removeItem('bookings');
+        localStorage.removeItem('homeServiceBookings');
+        localStorage.setItem('bookingDataVersion', BOOKING_DATA_VERSION);
+    }
+}
 
 // Get service display names
 function getServiceName(serviceId) {
@@ -129,9 +144,29 @@ function getServiceName(serviceId) {
         fade: 'Fade & Line-up',
         beard: 'Beard Trim & Shape',
         package: 'Full Grooming Package',
-        spray: 'Hair Spray Service'
+        spray: 'Hair Spray Service',
+        curly: 'Curly Hair Service',
+        kids: 'Kids Haircut'
     };
     return names[serviceId] || '';
+}
+
+// Prefill service and open booking form
+function selectServiceAndBook(serviceId) {
+    const serviceSelect = document.getElementById('service');
+    if (serviceSelect) {
+        serviceSelect.value = serviceId;
+        // default to Ordinary treatment
+        const ordinary = document.getElementById('ordinary');
+        if (ordinary) ordinary.checked = true;
+        // default to salon location
+        const salon = document.getElementById('salon');
+        if (salon) salon.checked = true;
+        updatePrice();
+    }
+    showSection('booking');
+    const nameField = document.getElementById('fullName');
+    if (nameField) nameField.focus();
 }
 
 // Update booking form price
@@ -206,6 +241,7 @@ function formatDate(dateString) {
 // Handle booking form submission
 document.addEventListener('DOMContentLoaded', function() {
     initializeDates();
+    initializeBookingStorage();
 
     const bookingForm = document.getElementById('bookingForm');
     if (bookingForm) {
@@ -397,6 +433,13 @@ function deleteBooking(bookingId) {
     homeServiceBookings = homeServiceBookings.filter(item => item.id !== bookingId);
     localStorage.setItem('bookings', JSON.stringify(bookings));
     localStorage.setItem('homeServiceBookings', JSON.stringify(homeServiceBookings));
+    loadBookingsReview();
+}
+
+function clearAllBookings() {
+    if (!confirm('Clear all bookings from My Bookings? This cannot be undone.')) return;
+    localStorage.removeItem('bookings');
+    localStorage.removeItem('homeServiceBookings');
     loadBookingsReview();
 }
 

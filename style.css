@@ -118,6 +118,7 @@ h2 {
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
 }
 
 .service-card:hover {
@@ -156,6 +157,25 @@ h2 {
 
 .service-info {
     padding: 1.5rem;
+}
+
+.book-service-btn {
+    margin-top: 1rem;
+    background: #1a1a1a;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.85rem 1rem;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 700;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.book-service-btn:hover {
+    background: #ffd700;
+    color: #333;
+    transform: translateY(-2px);
 }
 
 .service-info h3 {
@@ -356,4 +376,114 @@ input:focus, select:focus, textarea:focus {
 
 .booking-card {
     background: white;
-    border니까
+    border: 2px solid #f0f0f0;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.booking-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+}
+
+.booking-card h3 {
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+    color: #1a1a1a;
+}
+
+.booking-card p {
+    margin-bottom: 0.75rem;
+    color: #555;
+    line-height: 1.5;
+}
+
+.booking-status {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.booking-status.pending {
+    background: #ffedd5;
+    color: #b45309;
+}
+
+.booking-status.confirmed {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.booking-status.cancelled {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.booking-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.action-btn {
+    border: none;
+    border-radius: 8px;
+    padding: 0.85rem 1rem;
+    cursor: pointer;
+    font-weight: 700;
+    transition: transform 0.2s, background-color 0.3s;
+}
+
+.cancel-btn {
+    background: #ef4444;
+    color: white;
+}
+
+.confirm-btn {
+    background: #10b981;
+    color: white;
+}
+
+.delete-btn {
+    background: #6b7280;
+    color: white;
+}
+
+.action-btn:hover {
+    transform: translateY(-2px);
+}
+
+footer {
+    background: #1a1a1a;
+    color: #ddd;
+    text-align: center;
+    padding: 2rem 1rem;
+}
+
+footer p {
+    margin: 0.25rem 0;
+    font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .payment-methods {
+        grid-template-columns: 1fr;
+    }
+
+    nav {
+        padding: 0 1rem;
+    }
+
+    .hero {
+        padding: 4rem 1rem;
+    }
+}

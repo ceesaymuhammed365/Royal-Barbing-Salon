@@ -36,39 +36,73 @@
         <div class="container">
             <h2>Our Services & Prices</h2>
             <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-image"><img src="images/OIP.webp" alt="Classic Haircut"></div>
+                <div class="service-card" onclick="selectServiceAndBook('classic')">
+                    <div class="service-image"><img src="images/service-classic.svg" alt="Classic Haircut"></div>
                     <div class="service-info">
                         <h3>Classic Haircut</h3>
-                        <p>Traditional sharp haircut with styling</p>
+                        <p>Precision cut, styling, and grooming for everyday looks.</p>
                         <div class="price">Ordinary: 1,500 GMD | VIP: 2,000 GMD</div>
+                        <button type="button" class="book-service-btn">Book This Service</button>
                     </div>
                 </div>
 
-                <div class="service-card">
-                    <div class="service-image"><img src="images/OIP (1).webp" alt="Fade and Line-up"></div>
+                <div class="service-card" onclick="selectServiceAndBook('fade')">
+                    <div class="service-image"><img src="images/service-fade.svg" alt="Fade and Line-up"></div>
                     <div class="service-info">
                         <h3>Fade & Line-up</h3>
-                        <p>Modern fade with clean line-up</p>
+                        <p>Sharp fade with a detailed edge-up finish.</p>
                         <div class="price">Ordinary: 2,000 GMD | VIP: 2,500 GMD</div>
+                        <button type="button" class="book-service-btn">Book This Service</button>
                     </div>
                 </div>
 
-                <div class="service-card">
-                    <div class="service-image"><img src="images/OIP (2).webp" alt="Beard Trim and Shape"></div>
+                <div class="service-card" onclick="selectServiceAndBook('beard')">
+                    <div class="service-image"><img src="images/service-beard.svg" alt="Beard Trim and Shape"></div>
                     <div class="service-info">
                         <h3>Beard Trim & Shape</h3>
-                        <p>Professional beard grooming and styling</p>
+                        <p>Professional beard grooming, shaping, and line-up.</p>
                         <div class="price">Ordinary: 1,200 GMD | VIP: 1,800 GMD</div>
+                        <button type="button" class="book-service-btn">Book This Service</button>
                     </div>
                 </div>
 
-                <div class="service-card">
-                    <div class="service-image"><img src="images/download.webp" alt="Full Grooming Package"></div>
+                <div class="service-card" onclick="selectServiceAndBook('package')">
+                    <div class="service-image"><img src="images/service-package.svg" alt="Full Grooming Package"></div>
                     <div class="service-info">
                         <h3>Full Grooming Package</h3>
-                        <p>Haircut + beard trim + face treatment</p>
+                        <p>Haircut, beard trim, face treatment, and styling.</p>
                         <div class="price">Ordinary: 3,500 GMD | VIP: 5,000 GMD</div>
+                        <button type="button" class="book-service-btn">Book This Service</button>
+                    </div>
+                </div>
+
+                <div class="service-card" onclick="selectServiceAndBook('spray')">
+                    <div class="service-image"><img src="images/service-spray.svg" alt="Hair Spray Service"></div>
+                    <div class="service-info">
+                        <h3>Hair Spray Service</h3>
+                        <p>Long-lasting spray finish to lock in your style.</p>
+                        <div class="price">Ordinary: 400 GMD | VIP: 500 GMD</div>
+                        <button type="button" class="book-service-btn">Book This Service</button>
+                    </div>
+                </div>
+
+                <div class="service-card" onclick="selectServiceAndBook('curly')">
+                    <div class="service-image"><img src="images/service-curly.svg" alt="Curly Hair Service"></div>
+                    <div class="service-info">
+                        <h3>Curly Hair Service</h3>
+                        <p>Expert curl shaping, moisture care, and styling.</p>
+                        <div class="price">Ordinary: 2,500 GMD | VIP: 3,000 GMD</div>
+                        <button type="button" class="book-service-btn">Book This Service</button>
+                    </div>
+                </div>
+
+                <div class="service-card" onclick="selectServiceAndBook('kids')">
+                    <div class="service-image"><img src="images/service-kids.svg" alt="Kids Haircut"></div>
+                    <div class="service-info">
+                        <h3>Kids Haircut</h3>
+                        <p>Friendly kids cuts with gentle styling and finish.</p>
+                        <div class="price">Ordinary: 1,000 GMD | VIP: 1,500 GMD</div>
+                        <button type="button" class="book-service-btn">Book This Service</button>
                     </div>
                 </div>
             </div>
@@ -113,6 +147,9 @@
                         <option value="fade">Fade & Line-up - 2,000/2,500 GMD</option>
                         <option value="beard">Beard Trim & Shape - 1,200/1,800 GMD</option>
                         <option value="package">Full Grooming Package - 3,500/5,000 GMD</option>
+                        <option value="spray">Hair Spray Service - 400/500 GMD</option>
+                        <option value="curly">Curly Hair Service - 2,500/3,000 GMD</option>
+                        <option value="kids">Kids Haircut - 1,000/1,500 GMD</option>
                     </select>
                 </div>
 
@@ -154,33 +191,38 @@
                     <div class="payment-methods">
                         <div class="payment-option">
                             <input type="radio" id="wave" name="payment" value="Wave Mobile Money" required onclick="openPaymentApp('wave')">
-                            <a href="javascript:void(0)" onclick="selectAndOpenApp('wave', event)" title="Click to open Wave">
-                                        <label for="wave">Wave Mobile Money</label>
-                            </a>
+                            <label for="wave" onclick="selectAndOpenApp('wave', event)" title="Wave Mobile Money">
+                                <img class="payment-app-icon" src="images/wave.svg" alt="Wave logo">
+                                Wave Mobile Money
+                            </label>
                         </div>
                         <div class="payment-option">
                             <input type="radio" id="afrimoney" name="payment" value="Afrimoney" required onclick="openPaymentApp('afrimoney')">
-                            <a href="javascript:void(0)" onclick="selectAndOpenApp('afrimoney', event)" title="Click to open Afrimoney">
-                                        <label for="afrimoney">Afrimoney</label>
-                            </a>
+                            <label for="afrimoney" onclick="selectAndOpenApp('afrimoney', event)" title="Afrimoney">
+                                <img class="payment-app-icon" src="images/afrimoney.svg" alt="Afrimoney logo">
+                                Afrimoney
+                            </label>
                         </div>
                         <div class="payment-option">
                             <input type="radio" id="qmoney" name="payment" value="Qmoney" required onclick="openPaymentApp('qmoney')">
-                            <a href="javascript:void(0)" onclick="selectAndOpenApp('qmoney', event)" title="Click to open Qmoney">
-                                        <label for="qmoney">Qmoney</label>
-                            </a>
+                            <label for="qmoney" onclick="selectAndOpenApp('qmoney', event)" title="Qmoney">
+                                <img class="payment-app-icon" src="images/qmoney.svg" alt="Qmoney logo">
+                                Qmoney
+                            </label>
                         </div>
                         <div class="payment-option">
                             <input type="radio" id="aps" name="payment" value="APS Mobile Money" required onclick="openPaymentApp('aps')">
-                            <a href="javascript:void(0)" onclick="selectAndOpenApp('aps', event)" title="Click to open APS">
-                                        <label for="aps">APS Mobile Money</label>
-                            </a>
+                            <label for="aps" onclick="selectAndOpenApp('aps', event)" title="APS Mobile Money">
+                                <img class="payment-app-icon" src="images/aps.svg" alt="APS logo">
+                                APS Mobile Money
+                            </label>
                         </div>
                         <div class="payment-option">
                             <input type="radio" id="yonna" name="payment" value="Yonna Wallet" required onclick="openPaymentApp('yonna')">
-                            <a href="javascript:void(0)" onclick="selectAndOpenApp('yonna', event)" title="Click to open Yonna">
-                                        <label for="yonna">Yonna Wallet</label>
-                            </a>
+                            <label for="yonna" onclick="selectAndOpenApp('yonna', event)" title="Yonna Wallet">
+                                <img class="payment-app-icon" src="images/yonna.svg" alt="Yonna logo">
+                                Yonna Wallet
+                            </label>
                         </div>
                     </div>
                 </div>
@@ -263,10 +305,13 @@
                     <label for="hsService">Select Service *</label>
                     <select id="hsService" name="service" required onchange="updateHomeServicePrice()">
                         <option value="">-- Choose a service --</option>
-                        <option value="classic">Classic Haircut - 2,000/2,500 GMD</option>
-                        <option value="fade">Fade & Line-up - 2,500/3,000 GMD</option>
-                        <option value="beard">Beard Trim & Shape - 1,700/2,300 GMD</option>
-                        <option value="package">Full Grooming Package - 4,500/6,000 GMD</option>
+                        <option value="classic">Classic Haircut - 1,500/2,000 GMD</option>
+                        <option value="fade">Fade & Line-up - 2,000/2,500 GMD</option>
+                        <option value="beard">Beard Trim & Shape - 1,200/1,800 GMD</option>
+                        <option value="package">Full Grooming Package - 3,500/5,000 GMD</option>
+                        <option value="spray">Hair Spray Service - 400/500 GMD</option>
+                        <option value="curly">Curly Hair Service - 2,500/3,000 GMD</option>
+                        <option value="kids">Kids Haircut - 1,000/1,500 GMD</option>
                     </select>
                 </div>
 
@@ -294,33 +339,38 @@
                     <div class="payment-methods">
                         <div class="payment-option">
                             <input type="radio" id="hsWave" name="hsPayment" value="Wave Mobile Money" required onclick="openPaymentApp('wave')">
-                            <a href="javascript:void(0)" onclick="selectAndOpenApp('hsWave', event)" title="Click to open Wave">
-                                        <label for="hsWave">Wave Mobile Money</label>
-                            </a>
+                            <label for="hsWave" onclick="selectAndOpenApp('hsWave', event)" title="Wave Mobile Money">
+                                <img class="payment-app-icon" src="images/wave.svg" alt="Wave logo">
+                                Wave Mobile Money
+                            </label>
                         </div>
                         <div class="payment-option">
                             <input type="radio" id="hsAfrimoney" name="hsPayment" value="Afrimoney" required onclick="openPaymentApp('afrimoney')">
-                            <a href="javascript:void(0)" onclick="selectAndOpenApp('hsAfrimoney', event)" title="Click to open Afrimoney">
-                                        <label for="hsAfrimoney">Afrimoney</label>
-                            </a>
+                            <label for="hsAfrimoney" onclick="selectAndOpenApp('hsAfrimoney', event)" title="Afrimoney">
+                                <img class="payment-app-icon" src="images/afrimoney.svg" alt="Afrimoney logo">
+                                Afrimoney
+                            </label>
                         </div>
                         <div class="payment-option">
                             <input type="radio" id="hsQmoney" name="hsPayment" value="Qmoney" required onclick="openPaymentApp('qmoney')">
-                            <a href="javascript:void(0)" onclick="selectAndOpenApp('hsQmoney', event)" title="Click to open Qmoney">
-                                        <label for="hsQmoney">Qmoney</label>
-                            </a>
+                            <label for="hsQmoney" onclick="selectAndOpenApp('hsQmoney', event)" title="Qmoney">
+                                <img class="payment-app-icon" src="images/qmoney.svg" alt="Qmoney logo">
+                                Qmoney
+                            </label>
                         </div>
                         <div class="payment-option">
                             <input type="radio" id="hsAps" name="hsPayment" value="APS Mobile Money" required onclick="openPaymentApp('aps')">
-                            <a href="javascript:void(0)" onclick="selectAndOpenApp('hsAps', event)" title="Click to open APS">
-                                        <label for="hsAps">APS Mobile Money</label>
-                            </a>
+                            <label for="hsAps" onclick="selectAndOpenApp('hsAps', event)" title="APS Mobile Money">
+                                <img class="payment-app-icon" src="images/aps.svg" alt="APS logo">
+                                APS Mobile Money
+                            </label>
                         </div>
                         <div class="payment-option">
                             <input type="radio" id="hsYonna" name="hsPayment" value="Yonna Wallet" required onclick="openPaymentApp('yonna')">
-                            <a href="javascript:void(0)" onclick="selectAndOpenApp('hsYonna', event)" title="Click to open Yonna">
-                                        <label for="hsYonna">Yonna Wallet</label>
-                            </a>
+                            <label for="hsYonna" onclick="selectAndOpenApp('hsYonna', event)" title="Yonna Wallet">
+                                <img class="payment-app-icon" src="images/yonna.svg" alt="Yonna logo">
+                                Yonna Wallet
+                            </label>
                         </div>
                     </div>
                 </div>
@@ -370,6 +420,7 @@
         <div class="container">
             <h2>My Completed Bookings</h2>
             <p class="section-note">View your completed booking forms below. Show the QR code to your barber to confirm the booking and service details instantly.</p>
+            <button class="cta-button clear-bookings-btn" onclick="clearAllBookings()">Clear All Bookings</button>
             <div id="bookingsContainer" class="bookings-grid"></div>
             <p id="noBookingsMessage" class="section-note" style="display:none;">No completed bookings yet. Complete a booking or home service form to see your review here.</p>
         </div>
