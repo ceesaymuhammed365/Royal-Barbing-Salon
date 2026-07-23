@@ -1,224 +1,27 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Barber Dashboard</title>
-    <link rel="stylesheet" href="dashboard.css" />
-  </head>
-  <body>
-    <div class="dashboard-layout">
-      <aside class="sidebar">
-        <div class="brand-panel">
-          <span class="brand-icon">✂</span>
-          <div>
-            <h1>BarberPro</h1>
-            <p>Salon Dashboard</p>
-          </div>
-        </div>
-
-        <nav class="sidebar-nav" aria-label="Main navigation">
-          <button class="nav-item active" data-page="dashboard">Dashboard</button>
-          <button class="nav-item" data-page="appointments">Appointments</button>
-          <button class="nav-item" data-page="customers">Customers</button>
-          <button class="nav-item" data-page="payments">Payments</button>
-          <button class="nav-item" data-page="services">Services</button>
-          <button class="nav-item" data-page="settings">Settings</button>
-        </nav>
-
-        <div class="sidebar-footer">
-          <p>Ready for the next client</p>
-        </div>
-      </aside>
-
-      <main class="content-area">
-        <header class="topbar">
-          <div class="page-heading">
-            <h2>Dashboard</h2>
-            <p>View your latest bookings, revenue, and service activity.</p>
-          </div>
-          <div class="topbar-actions">
-            <button id="sidebarToggle" class="menu-toggle" aria-label="Toggle sidebar">☰</button>
-            <div class="profile-badge">AB</div>
-          </div>
-        </header>
-
-        <section class="overview-grid">
-          <article class="card card-primary">
-            <div>
-              <p>Earnings</p>
-              <h3>$5,420</h3>
-            </div>
-            <span class="card-note">+12% this month</span>
-          </article>
-          <article class="card card-secondary">
-            <div>
-              <p>Appointments</p>
-              <h3>24</h3>
-            </div>
-            <span class="card-note">5 confirmed today</span>
-          </article>
-          <article class="card card-tertiary">
-            <div>
-              <p>Customers</p>
-              <h3>128</h3>
-            </div>
-            <span class="card-note">New clients this week</span>
-          </article>
-          <article class="card card-quaternary">
-            <div>
-              <p>Services</p>
-              <h3>8</h3>
-            </div>
-            <span class="card-note">Active service items</span>
-          </article>
-        </section>
-
-        <section class="main-panels">
-          <article class="panel appointments-panel">
-            <div class="panel-header">
-              <div>
-                <h3>Upcoming Appointments</h3>
-                <p>Manage the next client schedule.</p>
-              </div>
-              <a href="#">See all</a>
-            </div>
-            <div class="table-wrap">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Customer</th>
-                    <th>Phone</th>
-                    <th>Payment</th>
-                    <th>Booking</th>
-                    <th>QR Code</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr data-booking="1">
-                    <td>
-                      <strong>Marcus Reed</strong>
-                      <span class="table-note">Signature Cut</span>
-                    </td>
-                    <td>+1 (555) 845-2212</td>
-                    <td><span class="payment-status paid">Paid</span></td>
-                    <td><span class="booking-status confirmed">Confirmed</span></td>
-                    <td><div class="qr-badge">QR</div></td>
-                    <td class="action-buttons">
-                      <button class="action-btn confirm">Confirm</button>
-                      <button class="action-btn complete">Complete</button>
-                      <button class="action-btn cancel">Cancel</button>
-                    </td>
-                  </tr>
-                  <tr data-booking="2">
-                    <td>
-                      <strong>Sophia Lane</strong>
-                      <span class="table-note">Beard Trim</span>
-                    </td>
-                    <td>+1 (555) 712-3398</td>
-                    <td><span class="payment-status pending">Pending</span></td>
-                    <td><span class="booking-status pending">Pending</span></td>
-                    <td><div class="qr-badge">QR</div></td>
-                    <td class="action-buttons">
-                      <button class="action-btn confirm">Confirm</button>
-                      <button class="action-btn complete">Complete</button>
-                      <button class="action-btn cancel">Cancel</button>
-                    </td>
-                  </tr>
-                  <tr data-booking="3">
-                    <td>
-                      <strong>Jordan Lee</strong>
-                      <span class="table-note">Hot Towel Shave</span>
-                    </td>
-                    <td>+1 (555) 640-1921</td>
-                    <td><span class="payment-status paid">Paid</span></td>
-                    <td><span class="booking-status confirmed">Confirmed</span></td>
-                    <td><div class="qr-badge">QR</div></td>
-                    <td class="action-buttons">
-                      <button class="action-btn confirm">Confirm</button>
-                      <button class="action-btn complete">Complete</button>
-                      <button class="action-btn cancel">Cancel</button>
-                    </td>
-                  </tr>
-                  <tr data-booking="4">
-                    <td>
-                      <strong>Olivia West</strong>
-                      <span class="table-note">Fade & Shape</span>
-                    </td>
-                    <td>+1 (555) 929-4044</td>
-                    <td><span class="payment-status failed">Failed</span></td>
-                    <td><span class="booking-status cancelled">Cancelled</span></td>
-                    <td><div class="qr-badge">QR</div></td>
-                    <td class="action-buttons">
-                      <button class="action-btn confirm">Confirm</button>
-                      <button class="action-btn complete">Complete</button>
-                      <button class="action-btn cancel">Cancel</button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </article>
-
-          <article class="panel summary-panel">
-            <div class="panel-header">
-              <div>
-                <h3>Salon Summary</h3>
-                <p>Quick control and top metrics.</p>
-              </div>
-            </div>
-            <div class="summary-list">
-              <div class="summary-item">
-                <span>Walk-ins</span>
-                <strong>7</strong>
-              </div>
-              <div class="summary-item">
-                <span>Today Revenue</span>
-                <strong>$820</strong>
-              </div>
-              <div class="summary-item">
-                <span>Confirmed</span>
-                <strong>18</strong>
-              </div>
-              <div class="summary-item">
-                <span>Open Slots</span>
-                <strong>6</strong>
-              </div>
-            </div>
-          </article>
-        </section>
-
-        <section class="services-panel">
-          <div class="panel-header">
-            <div>
-              <h3>Popular Services</h3>
-              <p>Build your schedule from top offerings.</p>
-            </div>
-            <a href="#">Manage services</a>
-          </div>
-          <div class="service-grid">
-            <div class="service-card">
-              <h4>Classic Haircut</h4>
-              <p>$28</p>
-            </div>
-            <div class="service-card">
-              <h4>Beard Trim</h4>
-              <p>$18</p>
-            </div>
-            <div class="service-card">
-              <h4>Hot Towel Shave</h4>
-              <p>$24</p>
-            </div>
-            <div class="service-card">
-              <h4>Color Touch</h4>
-              <p>$35</p>
-            </div>
-          </div>
-        </section>
-      </main>
-    </div>
-
-    <script src="dashboard.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Royal Barber Salon | Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <div class="dashboard-layout">
+    <aside class="sidebar" id="sidebar"><div><div class="brand-panel"><div class="brand-icon">RB</div><div><h1>Royal Barber</h1><p>New Yundum studio</p></div></div><nav class="sidebar-nav" aria-label="Dashboard navigation"><button class="nav-item active" data-page="dashboard">Overview <span>01</span></button><button class="nav-item" data-page="appointments">Appointments <span id="navAppointmentCount">0</span></button><button class="nav-item" data-page="customers">Customers <span>03</span></button><button class="nav-item" data-page="payments">Payments <span>04</span></button><button class="nav-item" data-page="services">Services <span>05</span></button><button class="nav-item" data-page="settings">Settings <span>06</span></button></nav></div><div class="sidebar-footer"><span class="live-dot"></span> Studio is open <strong>09:00 - 20:00</strong></div></aside>
+    <main class="content-area">
+      <header class="topbar"><div class="page-heading"><p class="eyebrow">Wednesday, July 22, 2026</p><h2>Good morning, Barber.</h2><p id="pageSubtitle">Here is what is happening at the studio today.</p></div><div class="topbar-actions"><button class="menu-toggle" id="sidebarToggle" aria-label="Open menu">☰</button><a class="view-site" href="index.html">View booking site ↗</a><div class="profile-badge">BA</div></div></header>
+      <section id="dashboardPage" class="page-view active-view"><div class="overview-grid"><article class="card card-primary"><p>Today’s appointments</p><h3 id="todayCount">0</h3><span class="card-note" id="todayNote">No bookings yet</span></article><article class="card card-secondary"><p>Pending confirmation</p><h3 id="pendingCount">0</h3><span class="card-note">Needs your attention</span></article><article class="card card-tertiary"><p>Confirmed revenue</p><h3 id="revenueTotal">0 GMD</h3><span class="card-note">From active bookings</span></article><article class="card card-quaternary"><p>Returning clients</p><h3 id="returningCount">0</h3><span class="card-note">Booked more than once</span></article></div><div class="main-panels"><section class="panel"><div class="panel-header"><div><p class="eyebrow">Live queue</p><h3>Upcoming appointments</h3></div><button class="text-button" data-page-link="appointments">View all ↗</button></div><div class="table-wrap"><table><thead><tr><th>Client</th><th>Service</th><th>Time</th><th>Status</th><th></th></tr></thead><tbody id="upcomingRows"></tbody></table><div class="empty-state" id="upcomingEmpty">Your upcoming queue will appear here.</div></div></section><section class="panel"><div class="panel-header"><div><p class="eyebrow">This month</p><h3>Popular services</h3></div></div><div class="service-bars" id="serviceBars"></div></section></div><section class="panel scanner-panel"><div class="panel-header"><div><p class="eyebrow">Fast check-in</p><h3>Find a booking</h3><p>Enter a booking ID or scan with a supported camera.</p></div><span id="scannerStatus" class="scanner-status">Ready</span></div><div class="scanner-layout"><div class="scanner-preview"><video id="qrVideo" playsinline muted aria-label="QR code camera preview"></video><div id="scannerPlaceholder" class="scanner-placeholder"><span class="scanner-frame">QR</span><p>Camera preview</p></div></div><div class="scanner-controls"><div class="scanner-actions"><button id="startScanner" class="scanner-btn primary" type="button">Start camera</button><button id="stopScanner" class="scanner-btn" type="button" disabled>Stop</button></div><form id="bookingLookupForm" class="lookup-form"><label for="bookingCode">Booking ID</label><div class="lookup-row"><input id="bookingCode" type="text" placeholder="Paste a booking ID" autocomplete="off"><button class="scanner-btn" type="submit">Find</button></div></form></div></div><div id="bookingDetails" class="booking-details" aria-live="polite" hidden></div></section></section>
+      <section id="appointmentsPage" class="page-view"><div class="section-heading"><div><p class="eyebrow">Manage the day</p><h2>Appointments</h2><p>Confirm, complete, or cancel bookings from the shared booking site.</p></div><button class="primary-action" id="exportBookings">Export CSV ↓</button></div><section class="panel"><div class="toolbar"><input id="appointmentSearch" type="search" placeholder="Search clients, phone, service..." aria-label="Search appointments"><select id="statusFilter" aria-label="Filter appointments"><option value="all">All statuses</option><option value="pending">Pending</option><option value="confirmed">Confirmed</option><option value="completed">Completed</option><option value="cancelled">Cancelled</option></select></div><div class="table-wrap"><table class="appointments-table"><thead><tr><th>Client</th><th>Service</th><th>Date & time</th><th>Payment</th><th>Status</th><th>Actions</th></tr></thead><tbody id="appointmentsRows"></tbody></table><div class="empty-state" id="appointmentsEmpty">No appointments match your filters.</div></div></section></section>
+      <section id="customersPage" class="page-view"><div class="section-heading"><div><p class="eyebrow">Client book</p><h2>Customers</h2><p>Every client currently stored by the booking site.</p></div></div><div class="customer-grid" id="customerGrid"></div></section>
+      <section id="paymentsPage" class="page-view"><div class="section-heading"><div><p class="eyebrow">Money in motion</p><h2>Payments</h2><p>Revenue is calculated from confirmed and completed bookings.</p></div></div><div class="payment-summary" id="paymentSummary"></div><section class="panel"><div class="panel-header"><h3>Recent transactions</h3></div><div class="table-wrap"><table><thead><tr><th>Client</th><th>Method</th><th>Service</th><th>Amount</th><th>Status</th></tr></thead><tbody id="paymentRows"></tbody></table></div></section></section>
+      <section id="servicesPage" class="page-view"><div class="section-heading"><div><p class="eyebrow">Your menu</p><h2>Services</h2><p>Current services and their ordinary starting prices.</p></div></div><div class="service-grid" id="servicesGrid"></div></section>
+      <section id="settingsPage" class="page-view"><div class="section-heading"><div><p class="eyebrow">Studio preferences</p><h2>Settings</h2><p>These preferences are saved in this browser.</p></div></div><section class="panel settings-panel"><form id="settingsForm"><label>Studio name<input name="studioName" value="Royal Barber Salon"></label><label>Opening time<input name="openingTime" type="time" value="09:00"></label><label>Closing time<input name="closingTime" type="time" value="20:00"></label><label class="toggle-row"><span>Show completed appointments in queue<input name="showCompleted" type="checkbox"></span></label><button class="primary-action" type="submit">Save preferences</button><p class="save-message" id="settingsMessage" role="status"></p></form></section></section>
+    </main>
+  </div>
+  <script src="dashboard.js"></script>
+</body>
 </html>
