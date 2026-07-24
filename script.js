@@ -107,23 +107,23 @@ function showSection(sectionId) {
 
 // Service Prices
 const servicePrices = {
-    classic: { ordinary: 1500, vip: 2000 },
-    fade: { ordinary: 2000, vip: 2500 },
-    beard: { ordinary: 1200, vip: 1800 },
+    classic: { ordinary: 200, vip: 300 },
+    fade: { ordinary: 200, vip: 300 },
+    beard: { ordinary: 150, vip: 200 },
     package: { ordinary: 3500, vip: 5000 },
     spray: { ordinary: 400, vip: 500 },
-    curly: { ordinary: 2500, vip: 3000 },
-    kids: { ordinary: 1000, vip: 1500 }
+    curly: { ordinary: 300, vip: 450 },
+    kids: { ordinary: 100, vip: 150 }
 };
 
 const homeServicePrices = {
-    classic: { ordinary: 1500, vip: 2000 },
-    fade: { ordinary: 2000, vip: 2500 },
-    beard: { ordinary: 1200, vip: 1800 },
+    classic: { ordinary: 200, vip: 300 },
+    fade: { ordinary: 200, vip: 300 },
+    beard: { ordinary: 150, vip: 200 },
     package: { ordinary: 3500, vip: 5000 },
     spray: { ordinary: 400, vip: 500 },
-    curly: { ordinary: 2500, vip: 3000 },
-    kids: { ordinary: 1000, vip: 1500 }
+    curly: { ordinary: 300, vip: 450 },
+    kids: { ordinary: 100, vip: 150 }
 };
 
 const BOOKING_DATA_VERSION = '2';
@@ -187,7 +187,7 @@ function updatePrice() {
     let price = servicePrices[service][treatmentType];
 
     if (location === 'Home Service') {
-        price += 500;
+        price += 1000;
     }
 
     // Update summary
@@ -471,7 +471,6 @@ function createBookingCard(booking) {
         actionButtons = `
             <div class="booking-actions">
                 <button type="button" class="action-btn cancel-btn" onclick="cancelBooking('${booking.id}')">Cancel Appointment</button>
-                <button type="button" class="action-btn confirm-btn" onclick="confirmBooking('${booking.id}')">Mark as Scanned</button>
             </div>
         `;
     } else if (booking.status === 'confirmed') {
