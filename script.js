@@ -498,7 +498,7 @@ function createBookingCard(booking) {
         ${booking.type === 'Home Service' ? `<p><strong>Address:</strong> ${booking.address}</p>` : ''}
         ${booking.notes ? `<p><strong>Notes:</strong> ${booking.notes}</p>` : ''}
         <img class="qr-code" src="${getBookingQRCodeUrl(buildBookingPayload(booking))}" alt="Booking QR Code">
-        <p style="text-align:center; margin-top:0.5rem; color:#777; font-size:0.95rem;">Scan this QR code with the barber to confirm your booking.</p>
+        <p style="text-align:center; margin-top:0.5rem; color:#777; font-size:0.95rem;">Scan this QR code with the barber to confirm your booking and do not share it with anyone!!!.</p>
         ${actionButtons}
     `;
 

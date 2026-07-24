@@ -1,11 +1,11 @@
 const serviceCatalog = {
-  'Classic Haircut': { price: 1500, color: '#e7b75b' },
-  'Fade & Line-up': { price: 2000, color: '#79b7ad' },
-  'Beard Trim & Shape': { price: 1200, color: '#c98a66' },
+  'Classic Haircut': { price: 200, color: '#e7b75b' },
+  'Fade & Line-up': { price: 200, color: '#79b7ad' },
+  'Beard Trim & Shape': { price: 150, color: '#c98a66' },
   'Full Grooming Package': { price: 3500, color: '#9b8bc4' },
   'Hair Spray Service': { price: 400, color: '#db8a9f' },
-  'Curly Hair Service': { price: 2500, color: '#7d9ecb' },
-  'Kids Haircut': { price: 1000, color: '#d0ad78' }
+  'Curly Hair Service': { price: 300, color: '#7d9ecb' },
+  'Kids Haircut': { price: 100, color: '#d0ad78' }
 };
 const pageMeta = {
   dashboard: ['Dashboard', 'Here is what is happening at the studio today.'],
